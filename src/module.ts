@@ -2,6 +2,8 @@ import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { defineNuxtModule, addPlugin } from "@nuxt/kit";
 
+const DEFAULT_DOMAIN = "cdn.usefathom.com";
+
 export interface ModuleOptions {
   domain?: string;
   siteId: string | null;
@@ -17,17 +19,15 @@ export default defineNuxtModule<ModuleOptions>({
     },
   },
   defaults: {
-    domain: "cdn.usefathom.com",
+    domain: DEFAULT_DOMAIN,
     siteId: null,
     enableDev: false,
   },
   setup(options, nuxt) {
     if (!nuxt.options.dev || (nuxt.options.dev && options.enableDev)) {
-      if (!options.siteId) {
-        throw new Error("SiteId is required to activate Fathom Analytics");
-      } else {
+      if (options.siteId) {
         nuxt.options.runtimeConfig.public.fathom = {
-          domain: options.domain,
+          domain: options.domain || DEFAULT_DOMAIN,
           siteId: options.siteId,
         };
 
