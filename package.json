@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-fathom-analytics",
+  "name": "@maneuver/nuxt-fathom-analytics",
   "version": "1.0.0",
   "license": "MIT",
   "description": "Fathom Analytics module for Nuxt3",
